@@ -22,3 +22,19 @@
 2024-12-29 15:12:36 - ERROR - src.wechat.sender - 发送到微信失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
 2024-12-29 15:12:36 - ERROR - root - 发送到微信群失败
 2024-12-29 15:12:36 - INFO - root - 定时任务完成 - 2024-12-29 15:12:36.339003
+2024-12-29 15:48:37 - INFO - root - 定时任务已启动
+2024-12-29 15:48:37 - INFO - root - 开始执行定时任务 - 2024-12-29 15:48:37.978659
+2024-12-29 15:48:47 - INFO - root - 已保存8个资源到/Users/liff/CascadeProjects/telegram_quark_search/results/results_20241229_1548.json
+2024-12-29 15:48:54 - INFO - itchat - Getting uuid of QR code.
+2024-12-29 15:48:54 - INFO - itchat - Downloading QR code.
+2024-12-29 15:48:54 - INFO - itchat - Please scan the QR code to log in.
+2024-12-29 15:49:26 - INFO - itchat - Please press confirm on your phone.
+2024-12-29 15:49:28 - ERROR - src.wechat.sender - 微信初始化失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2024-12-29 15:49:28 - ERROR - src.wechat.sender - 发送到微信失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2024-12-29 15:49:28 - ERROR - root - 发送到微信群失败
+2024-12-29 15:49:28 - INFO - root - 定时任务完成 - 2024-12-29 15:49:28.255382
+2024-12-29 16:04:19 - INFO - root - 定时任务已启动
+2024-12-29 16:04:19 - INFO - root - 开始执行定时任务 - 2024-12-29 16:04:19.707070
+2024-12-29 16:04:54 - INFO - root - 已保存8个资源到/Users/liff/CascadeProjects/telegram_quark_search/results/results_20241229_1604.json
+2024-12-29 16:05:22 - WARNING - telethon.network.connection.connection - Server closed the connection: 0 bytes read on a total of 8 expected bytes
+2024-12-29 16:05:22 - INFO - root - 定时任务完成 - 2024-12-29 16:05:22.102492
