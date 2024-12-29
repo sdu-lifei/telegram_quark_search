@@ -1,0 +1,24 @@
+2024-12-29 15:00:00 - INFO - root - 定时任务已启动
+2024-12-29 15:00:00 - INFO - root - 开始执行定时任务 - 2024-12-29 15:00:00.631659
+2024-12-29 15:01:09 - ERROR - root - 保存并分享失败: {'success': False, 'message': '获取文件信息失败: 文件涉及违规内容'}
+2024-12-29 15:01:16 - INFO - root - 已保存8个资源到/Users/liff/CascadeProjects/telegram_quark_search/results/results_20241229_1501.json
+2024-12-29 15:01:24 - INFO - itchat - Getting uuid of QR code.
+2024-12-29 15:01:25 - INFO - itchat - Downloading QR code.
+2024-12-29 15:01:25 - INFO - itchat - Please scan the QR code to log in.
+2024-12-29 15:01:39 - INFO - itchat - Please press confirm on your phone.
+2024-12-29 15:01:41 - ERROR - src.wechat.sender - 微信初始化失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2024-12-29 15:01:41 - ERROR - src.wechat.sender - 发送到微信失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2024-12-29 15:01:41 - ERROR - root - 发送到微信群失败
+2024-12-29 15:01:41 - INFO - root - 定时任务完成 - 2024-12-29 15:01:41.486249
+2024-12-29 15:11:01 - INFO - root - 定时任务已启动
+2024-12-29 15:11:01 - INFO - root - 开始执行定时任务 - 2024-12-29 15:11:01.899005
+2024-12-29 15:12:03 - ERROR - root - 保存并分享失败: {'success': False, 'message': '获取文件信息失败: 文件涉及违规内容'}
+2024-12-29 15:12:10 - INFO - root - 已保存8个资源到/Users/liff/CascadeProjects/telegram_quark_search/results/results_20241229_1512.json
+2024-12-29 15:12:16 - INFO - itchat - Getting uuid of QR code.
+2024-12-29 15:12:17 - INFO - itchat - Downloading QR code.
+2024-12-29 15:12:17 - INFO - itchat - Please scan the QR code to log in.
+2024-12-29 15:12:33 - INFO - itchat - Please press confirm on your phone.
+2024-12-29 15:12:36 - ERROR - src.wechat.sender - 微信初始化失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2024-12-29 15:12:36 - ERROR - src.wechat.sender - 发送到微信失败: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2024-12-29 15:12:36 - ERROR - root - 发送到微信群失败
+2024-12-29 15:12:36 - INFO - root - 定时任务完成 - 2024-12-29 15:12:36.339003
