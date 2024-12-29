@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: itchat-uos
+Version: 1.5.0.dev0
+Summary: 复活Itchat, 仅仅需要 pip install itchat-uos, good luck !
+Home-page: https://github.com/why2lyj/ItChat-UOS
+Author: Snow Wang
+Author-email: admin@farseer.vip
+License: MIT
+Requires-Dist: requests
+Requires-Dist: pyqrcode
+Requires-Dist: pypng
+
+itchat
+
+

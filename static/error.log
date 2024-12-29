@@ -1,0 +1,25 @@
+2024/12/24 00:13:08 [Debug] app/log: Logger started
+2024/12/24 00:13:08 [Debug] app/proxyman/inbound: creating stream worker on 127.0.0.1:1080
+2024/12/24 00:13:08 [Info] transport/internet/tcp: listening TCP on 127.0.0.1:1080
+2024/12/24 00:13:08 [Info] transport/internet/udp: listening UDP on 127.0.0.1:1080
+2024/12/24 00:13:08 [Warning] V2Ray 5.7.0 started
+2024/12/24 00:13:21 [Debug] app/log: Logger closing
+2024/12/24 00:30:26 [Debug] app/log: Logger started
+2024/12/24 00:30:53 [Debug] app/log: Logger started
+2024/12/24 00:30:53 [Debug] app/proxyman/inbound: creating stream worker on 127.0.0.1:1080
+2024/12/24 00:30:53 [Info] transport/internet/tcp: listening TCP on 127.0.0.1:1080
+2024/12/24 00:30:53 [Info] transport/internet/udp: listening UDP on 127.0.0.1:1080
+2024/12/24 00:30:53 [Warning] V2Ray 5.7.0 started
+2024/12/24 00:32:07 [Debug] app/log: Logger closing
+2024/12/24 00:33:04 [Debug] app/log: Logger started
+2024/12/24 00:33:04 [Debug] app/proxyman/inbound: creating stream worker on 127.0.0.1:1080
+2024/12/24 00:33:04 [Info] transport/internet/tcp: listening TCP on 127.0.0.1:1080
+2024/12/24 00:33:04 [Info] transport/internet/udp: listening UDP on 127.0.0.1:1080
+2024/12/24 00:33:04 [Warning] V2Ray 5.7.0 started
+2024/12/24 00:33:50 [Debug] app/log: Logger closing
+2024/12/24 00:34:07 [Debug] app/log: Logger started
+2024/12/24 00:34:07 [Debug] app/proxyman/inbound: creating stream worker on 127.0.0.1:1080
+2024/12/24 00:34:07 [Info] transport/internet/tcp: listening TCP on 127.0.0.1:1080
+2024/12/24 00:34:07 [Info] transport/internet/udp: listening UDP on 127.0.0.1:1080
+2024/12/24 00:34:07 [Warning] V2Ray 5.7.0 started
+2024/12/24 00:35:20 [Debug] app/log: Logger closing

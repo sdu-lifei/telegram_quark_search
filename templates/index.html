@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>夸克网盘资源搜索</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: #3498db;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .result-card {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen pb-16">
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">夸克网盘资源搜索</h1>
+            <p class="text-gray-600">搜索Telegram群组中分享的夸克网盘资源</p>
+        </div>
+        
+        <div class="max-w-2xl mx-auto">
+            <div class="flex gap-2 mb-8">
+                <input type="text" id="searchInput" 
+                       class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                       placeholder="输入搜索关键词...">
+                <button id="searchButton" 
+                        class="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+                        onclick="startSearch()">
+                    搜索
+                </button>
+            </div>
+            
+            <div id="searchStatus" class="text-center mb-4 hidden">
+                <div class="loading mr-2"></div>
+                <span class="text-gray-600">正在搜索...</span>
+            </div>
+            
+            <div id="results" class="space-y-4"></div>
+            
+            <div id="noResults" class="text-center text-gray-600 hidden">
+                没有找到相关结果
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container mx-auto">
+            <div class="flex justify-center items-center space-x-4">
+                <span>联系方式：</span>
+                <a href="mailto:your-email@example.com" class="hover:text-blue-500">📧 your-email@example.com</a>
+                <span>|</span>
+                <span>微信：your-wechat</span>
+                <span>|</span>
+                <span>Telegram：@your-telegram</span>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        let currentSearch = null;
+        
+        function startSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) return;
+            
+            // 重置界面状态
+            const button = document.getElementById('searchButton');
+            const status = document.getElementById('searchStatus');
+            const results = document.getElementById('results');
+            const noResults = document.getElementById('noResults');
+            
+            button.disabled = true;
+            status.classList.remove('hidden');
+            results.innerHTML = '';
+            noResults.classList.add('hidden');
+            
+            // 如果有正在进行的搜索，关闭它
+            if (currentSearch) {
+                currentSearch.close();
+            }
+            
+            // 创建新的 EventSource
+            currentSearch = new EventSource(`/search?query=${encodeURIComponent(query)}`);
+            let resultCount = 0;
+            let hasError = false;  // 添加错误状态标记
+            
+            currentSearch.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                
+                if (hasError) return;  // 如果已经显示了错误，忽略后续消息
+                
+                if (data.error) {
+                    hasError = true;
+                    showError(data.error);
+                    finishSearch();
+                    currentSearch.close();
+                    return;
+                }
+
+                if (data.timeout) {
+                    hasError = true;
+                    showError(data.message || "搜索超时，请缩小搜索范围或稍后重试");
+                    finishSearch();
+                    currentSearch.close();
+                    return;
+                }
+
+                if (data.complete) {
+                    finishSearch();
+                    currentSearch.close();
+                    // 添加页脚信息
+                    const footer = document.createElement('div');
+                    footer.className = 'text-center text-gray-600 mt-4 pb-8';
+                    footer.textContent = `共找到 ${data.total} 条结果`;
+                    document.getElementById('results').appendChild(footer);
+                    return;
+                }
+                
+                resultCount++;
+                showResult(data);
+            };
+            
+            // 添加客户端超时处理
+            setTimeout(() => {
+                if (currentSearch && !hasError) {
+                    currentSearch.close();
+                    finishSearch();
+                    if (resultCount === 0) {
+                        hasError = true;
+                        showError("搜索超时，请缩小搜索范围或稍后重试");
+                    }
+                }
+            }, 12000); // 12秒客户端超时（比服务器超时稍长）
+            
+            currentSearch.onerror = function() {
+                if (!hasError) {
+                    currentSearch.close();
+                    finishSearch();
+                    
+                    if (resultCount === 0) {
+                        noResults.classList.remove('hidden');
+                    }
+                }
+            };
+        }
+        
+        function showResult(result) {
+            const results = document.getElementById('results');
+            const card = document.createElement('div');
+            card.className = 'result-card bg-white rounded-lg shadow-md p-4';
+            
+            // 计算相似度的颜色，从红色(0%)渐变到绿色(100%)
+            const hue = Math.min(120, Math.round(result.similarity * 1.2));
+            const similarityColor = `hsl(${hue}, 70%, 45%)`;
+            
+            card.innerHTML = `
+                <div class="flex justify-between items-start mb-2">
+                    <div class="text-gray-800 whitespace-pre-wrap">${result.text}</div>
+                    <span class="text-sm font-semibold ml-2" style="color: ${similarityColor}">
+                        ${result.similarity}%
+                    </span>
+                </div>
+                <a href="${result.link}" target="_blank" 
+                   class="text-blue-500 hover:text-blue-600 hover:underline break-all">
+                    ${result.link}
+                </a>
+            `;
+            
+            results.appendChild(card);
+        }
+        
+        function showError(error) {
+            const results = document.getElementById('results');
+            const card = document.createElement('div');
+            card.className = 'result-card bg-red-50 text-red-600 rounded-lg shadow-md p-4';
+            card.textContent = `搜索出错: ${error}`;
+            results.appendChild(card);
+            finishSearch();
+        }
+        
+        function finishSearch() {
+            const button = document.getElementById('searchButton');
+            const status = document.getElementById('searchStatus');
+            button.disabled = false;
+            status.classList.add('hidden');
+        }
+        
+        // 添加回车键搜索支持
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                startSearch();
+            }
+        });
+    </script>
+</body>
+</html> 
